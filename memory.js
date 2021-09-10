@@ -164,12 +164,12 @@ createDivsForColors(shuffledColors);
 
 btn.addEventListener("click", function(){
   alert("You asked for this....");
-  createDivsForColors(newShuffle);
+  createDivsForColors(shuffle(newColors));
 })
 
 restart.addEventListener("click", function(){
   while(gameContainer.firstChild){
     gameContainer.removeChild(gameContainer.firstChild)
   }
-  createDivsForColors(newShuffle);
+  createDivsForColors(shuffle(newColors));
 })
