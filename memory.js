@@ -4,6 +4,11 @@ let pickOne="";
 let pickTwo="";
 let firstChoice="";
 let secondChoice="";
+const btn=document.querySelector("button");
+const restart=document.querySelector("#restart");
+
+
+
 
 
 const COLORS = [
@@ -17,6 +22,19 @@ const COLORS = [
   "green",
   "orange",
   "purple"
+];
+
+const newColors =[
+  "purple",
+  "orange",
+  "blue",
+  "red",
+  "green",
+  "red",
+  "orange",
+  "green",
+  "purple",
+  "blue"
 ];
 
 
@@ -39,7 +57,8 @@ function shuffle(array) {
 }
 
 let shuffledColors = shuffle(COLORS);
-
+let newShuffle=shuffle(newColors);
+console.log(newShuffle);
 
 function createDivsForColors(colorArray) {
   for (let color of colorArray) {
@@ -48,27 +67,19 @@ function createDivsForColors(colorArray) {
 
    
     newDiv.classList.add(color);
-
     newDiv.addEventListener("click", handleCardClick);
-
+   
     gameContainer.append(newDiv);
   }
 }
+
 let count = 0;
 // 
 let guessedCards=[];
 function handleCardClick(event) {
 
   const chosenCard=event.target
-  // chosenCard.setAttribute("data", "guessed");
-  // // guessedCards+=chosenCard;
-  // console.log(guessedCards);
-  // console.log(chosenCard);
-  // guess=document.getElementsByClassName(event.target.classList);
-  // console.log(guess);
-  // guessedCards+=guess;
-  // guessedCards += guess;
-  // console.log(guessedCards);
+
 
 
 
@@ -83,14 +94,13 @@ function handleCardClick(event) {
 
   function cardCount(){
     count ++;
-    console.log(count);
+   
     if(pickOne !== ""){
       pickTwo=event.target.className;
     }else{
       pickOne=event.target.className;
     }
-    console.log(pickOne);
-    console.log(pickTwo);
+    
     if(firstChoice!==""){
       secondChoice=event.target;
     }else{
@@ -113,8 +123,7 @@ function handleCardClick(event) {
      setTimeout(function(){
      if(pickOne === pickTwo){
         alert("You guessed Correctly!");
-        console.log(firstChoice);
-        console.log(secondChoice);
+       
         firstChoice="";
         secondChoice="";
         pickOne="";
@@ -127,8 +136,7 @@ function handleCardClick(event) {
             firstChoice.style.backgroundColor="";
             secondChoice.style.backgroundColor="";
           
-          console.log(firstChoice);
-          console.log(secondChoice);
+      
           
           firstChoice="";
           secondChoice=""
@@ -153,3 +161,15 @@ function handleCardClick(event) {
 
 
 createDivsForColors(shuffledColors);
+
+btn.addEventListener("click", function(){
+  alert("You asked for this....");
+  createDivsForColors(newShuffle);
+})
+
+restart.addEventListener("click", function(){
+  while(gameContainer.firstChild){
+    gameContainer.removeChild(gameContainer.firstChild)
+  }
+  createDivsForColors(newShuffle);
+})
